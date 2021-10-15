@@ -4,34 +4,183 @@ import logo from './black_color.png'
 
 const InvoiceForm = () => {
 const [name,Setname] = useState()
-const [fullname,Setfullname] = useState()
+const [order,Setorder] = useState()
+const [date,SetDate] = useState()
+const [sold,SetSoldto] = useState()
+const [ship,SetShipto] = useState()
+const [payment,SetPaymentMethod] = useState()
+const [shipping,SetShippingMethod] = useState()
+const [shippingCharges,SetShippingCharges] = useState("0.00")
+const [productName, SetProductName] = useState()
+const [sku, SetSKU] = useState()
+const [price, SetPrice] = useState("0.00")
+const [qty, SetQty] = useState()
+const [tax, SetTax] = useState("0")
+const [subtotal, SetSubtotal] = useState("0.00")
+const [credit, SetCredit] = useState("0.00")
+const [show, setShow] = useState(true);
 
-    const inputEvent=(event)=>{
+const grandTotal= parseInt(subtotal)+parseInt(credit)+parseInt(shippingCharges);
+
+
+    const OninputEvent=(event)=>{
         Setname(event.target.value);
     }
-
-    const onsubmit=()=>{
-        Setfullname(name)
+    const OnOrderEvent=(event)=>{
+        Setorder(event.target.value);
     }
+    const OndateTime=(event)=>{
+        SetDate(event.target.value);
+    }
+    const OnsoldTo=(event)=>{
+        SetSoldto(event.target.value);
+    }
+    const OnshipTo=(event)=>{
+        SetShipto(event.target.value);
+    }
+    const OnpaymentMethod=(event)=>{
+        SetPaymentMethod(event.target.value);
+    }
+    const OnshippingMethod=(event)=>{
+        SetShippingMethod(event.target.value);
+    }
+    const OnshippingCharges=(event)=>{
+        SetShippingCharges(event.target.value);
+    }
+    const OnProductName=(event)=>{
+        SetProductName(event.target.value);
+    }
+    const OnSKU=(event)=>{
+        SetSKU(event.target.value);
+    }
+    const OnChangePrice=(event)=>{
+        SetPrice(event.target.value);
+    }
+    const OnChangeQty=(event)=>{
+        SetQty(event.target.value);
+    }
+    const OnChangeTax=(event)=>{
+        SetTax(event.target.value);
+    }
+    const OnChangeSubtotal=(event)=>{
+        SetSubtotal(event.target.value);
+    }
+    const OnChangeCredit=(event)=>{
+        SetCredit(event.target.value);
+    }
+
+
     return (
-        <div>
-         <h1>Hello {fullname}</h1>
-            <input type="text"
-            placeholder="Enter Your Name"
-            onChange={inputEvent}
+      
+        <div> 
+        <div className="all_input" style={{ display: show ? "block" : "none" }}>
+        <div className="inputs">
+        <div className="input_label">
+        <label><b>Enter Invoice Number:</b></label>
+            <input className="input" type="number"
+            onChange={OninputEvent}
             value={name} 
             />
-            <button onClick={onsubmit}>Click ME👍</button>
+            </div>
+            <div className="input_label">
+            <label><b>Enter OrderId:</b></label>
+            <input className="input" type="text"
+            onChange={OnOrderEvent}
+            value={order} 
+            />
+            </div>
+            <div className="input_label">
+            <label><b>Date & Time:</b></label>
+            <input className="input" type="text"
+            placeholder="14 Oct 2021, 07:43:37 PM"
+            onChange={OndateTime}
+            value={date} 
+            />
+            </div>
+            <div className="input_label">
+            <label><b>Sold To:</b></label>
+            <input className="input" type="text"
+            onChange={OnsoldTo}
+            value={sold} 
+            /></div>
+            <div className="input_label">
+            <label><b>Ship to:</b></label>
+            <input className="input" type="text"
+            onChange={OnshipTo}
+            value={ship} 
+            /></div>
+            <div className="input_label">
+            <label><b>Payment Method:</b></label>
+            <input className="input" type="text"
+            onChange={OnpaymentMethod}
+            value={payment} 
+            /></div>
+            <div className="input_label">
+            <label><b>Shipping Method:</b></label>
+            <input className="input" type="text"
+            onChange={OnshippingMethod}
+            value={shipping} 
+            /></div>
+            <div className="input_label">
+            <label><b>Shipping Charges:</b></label>
+            <input className="input" type="number"
+            onChange={OnshippingCharges}
+            value={shippingCharges} 
+            /></div>
+            <div className="input_label">
+            <label><b>Product Name:</b></label>
+            <input className="input" type="text"
+            onChange={OnProductName}
+            value={productName} 
+            /></div>
+            <div className="input_label">
+            <label><b>SKU:</b></label>
+            <input className="input" type="text"
+            onChange={OnSKU}
+            value={sku} 
+            /></div>
+            <div className="input_label">
+            <label><b>Price:</b></label>
+            <input className="input" type="number"
+            onChange={OnChangePrice}
+            value={price} 
+            /></div>
+            <div className="input_label">
+            <label><b>Quantityy:</b></label>
+            <input className="input" type="text"
+            onChange={OnChangeQty}
+            value={qty} 
+            /></div>
+            <div className="input_label">
+            <label><b>Tax %:</b></label>
+            <input className="input" type="text"
+            onChange={OnChangeTax}
+            value={tax} 
+            /></div>
+            <div className="input_label">
+            <label><b>Sub Total:</b></label>
+            <input className="input" type="number"
+            onChange={OnChangeSubtotal}
+            value={subtotal} 
+            /></div>
+            <div className="input_label">
+            <label><b>Credit Points:</b></label>
+            <input className="input" type="number"
+            onChange={OnChangeCredit}
+            value={credit} 
+            /></div>
+            </div>
+            </div>
         <div className="container">
         <div className="logo">
-            <img src={logo} alt="logo" />
+            <img  onClick={() => setShow((s) => !s)} src={logo} alt="logo" />
         </div>
         <h2>Tax Invoice</h2>
         <div className="invoice_container">
         <div className="upper_container">
-                <p>Invoice: {fullname} </p>
-                <p>Order: order_I9ExXEVRkg1h6u</p>
-                <p>Order Date & Time: 14 Oct 2021, 07:43:37 PM</p>
+                <p>Invoice: {name} </p>
+                <p>Order: {order}</p>
+                <p>Order Date & Time: {date}</p>
             </div>
             <table>
             <tbody>
@@ -40,21 +189,11 @@ const [fullname,Setfullname] = useState()
                   <th>Ship to:</th>
                 </tr>
                 <tr>
-                <td>
-                      Navneet Singh
-                   SF - 143
-                   Shastri Nagar
-               Ghaziabad, Uttar Pradesh, 201001
-                   India
-                   T: 8800970001
+                <td style={{width: "50%"}}>
+                     {sold}
                 </td>
-                <td>
-                      Navneet Singh
-                   SF - 143
-                   Shastri Nagar
-               Ghaziabad, Uttar Pradesh, 201001
-                   India
-                   T: 8800970001
+                <td style={{width: "50%"}}>
+                {ship}
                 </td>
                 </tr>
                 </tbody>
@@ -68,11 +207,11 @@ const [fullname,Setfullname] = useState()
                     </tr>
                     <tr>
                       <td>
-                          <p>Credit Card</p>
+                          <p>{payment}</p>
                     </td>
                       <td>
-                        <p>Marketplace Rates</p>
-                        <p>(Total Shipping Charges ₹0.00)</p>
+                        <p>{shipping}</p>
+                        <p>(Total Shipping Charges ₹{shippingCharges})</p>
                     </td>
                     </tr>
                     </tbody>
@@ -91,22 +230,22 @@ const [fullname,Setfullname] = useState()
                     </tr>
                     <tr>
                       <td style={{width: "50%"}}>
-                          <p>Asus tuff 2021 f15 Intel® Core™ i7-11800H Processor 2.3 GHz (24M Cache, up to 4.6 GHz, 8 Cores) M8NRCX05D975340</p>
+                          <p>{productName}</p>
                     </td>
                       <td>
-                          <p>NA</p>
+                          <p>{sku}</p>
                     </td>
                     <td>
-                        <p>₹88,149</p>
+                        <p>₹{price}</p>
                   </td>
                     <td>
-                        <p>1</p>
+                        <p>{qty}</p>
                   </td>
                     <td>
-                        <p>18%</p>
+                        <p>{tax}%</p>
                   </td>
                     <td>
-                        <p>₹ 1,07,499.00</p>
+                        <p>₹{subtotal}</p>
                   </td>
                     </tr>
                     </tbody>
@@ -116,19 +255,19 @@ const [fullname,Setfullname] = useState()
                   <div className="subtotal_items">
                       <div className="subtotal">
                           <p>Subtotal:</p>
-                          <span>₹107499</span>
+                          <span>₹{subtotal}</span>
                       </div>
                       <div className="credit">
                       <p>Credit Point: </p>
-                      <span>₹0.00</span>
+                      <span>₹{credit}</span>
                     </div>
                       <div className="credit">
                       <p>Shipping Charges: </p>
-                      <span>₹0.00</span>
+                      <span>₹{shippingCharges}</span>
                     </div>
                     <div className="grandTotal">
                       <p>Grand Total:</p>
-                      <span>₹107499</span>
+                      <span>₹{grandTotal}</span>
                     </div>
               </div>
         </div>
